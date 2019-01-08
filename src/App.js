@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import { MyProvider } from './Components/ContextProvider/MyProvider';
+
+import Layout from './Components/Layout';
+
 
 class App extends Component {
+
+
+
   render() {
     return (
-      <div className="App">
-
-      </div>
+      <MyProvider>
+       <div className="App">
+              <Layout />
+        </div>    
+      </MyProvider>
     );
   }
 }

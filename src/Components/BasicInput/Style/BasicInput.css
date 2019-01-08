@@ -1,0 +1,21 @@
+.BasicInput { 
+    border: 2px ridge #cecece;
+    margin-left: 5%;
+    margin-right: 1%;
+   width: 90%;
+    padding: 1%;
+    margin-top: 2%;
+}
+
+.Buttons {
+    padding: 15;
+    margin-bottom: 2px;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: wrap;
+    margin-top: 10;
+}
+
+.AddButton {
+    margin-right: 10px;
+}
