@@ -8,17 +8,23 @@ import AddBasicInput from './Buttons/AddBasicInput';
 
 
 
-class Layout extends Component {
-
+export class Layout extends Component {
     render() {
+        const returnObjects = (
+    
+            this.props.newObj.map((newObj, ID) => (
+                <div key={ID}>
+                <BasicInput key={ID} ID={ID} />
+                    {newObj.subItem !== null ?  'error' : <SubInput />}
+                </div>
+             ))
+)
         return (
             <myContext.Consumer>
             {(value) => (
                 <div>
-                    {value.state.newObj.map(({ question, type, subItem }, ID) => (
-                       <BasicInput id={ID} question={question} type={type} subItem={subItem} />     
-                    ))}
-                 
+
+                 {returnObjects}
                     
                 <AddBasicInput>
                       Add Input 
@@ -30,4 +36,12 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+const LayoutProvider = () => (
+    <myContext.Consumer>
+        {(value) => {
+            return <Layout newObj={value.state.newObj} />
+        }}
+    </myContext.Consumer>
+)
+
+export default LayoutProvider;

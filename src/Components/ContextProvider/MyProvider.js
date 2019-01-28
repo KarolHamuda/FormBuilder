@@ -9,28 +9,30 @@ export class MyProvider extends Component {
       super(props)
       
       this.state = {
-        type: [],
+        newObj: 
+        [
+          {
+            question: '', 
+            type: '', 
+            subItem: ''
+          }
+        ],
 
-        id: [],
-        currentItem: [],
-        question: [],
-        subInput: [],
-
-        type: [],
-        subCondition: [],
-
-        newObj: [{question: [], type: [], subItem: []}]
+        CreateSubInput: (subObj, id) => {
+          this.addSubInput(subObj, id)
+        }
       }
     }
 
-    addInput = (Obj) => {
-      
-      console.log(Obj)
-      console.log(this.state.newObj)
+    addInput = () => {
       this.setState({
         newObj:  [
           ...this.state.newObj,
-          Obj
+          {
+            question: '',
+            type: '',
+            subItem: ''
+          }
         ]
       })
     }
@@ -54,13 +56,11 @@ export class MyProvider extends Component {
         <myContext.Provider value={{
           state: this.state,
 
-        CreateInput: (Obj) => {
-          this.addInput(Obj)
+        CreateInput: () => {
+          this.addInput()
         },
 
-        CreateSubInput: (subObj, id) => {
-          this.addSubInput(subObj, id)
-        }
+
 
         }}>
           {this.props.children}

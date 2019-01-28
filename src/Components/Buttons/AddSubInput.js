@@ -4,18 +4,28 @@ import myContext from '../ContextProvider/MyProvider';
 
 import '../BasicInput/Style/BasicInput.css';
 
-
+let newObj = []
 class AddSubInput extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            id: 1,
-            question: [],
-            type: [],
-            subItem: [],
-            Obj: {condition: [], addCondition: [], question: [], type: [], subItem: []}
+            condition: '',
+            addCondition: '',
+            question: '',
+            type: '',
+            subItem: ''
         }
         
+    }
+
+    createNewObj = (condition, addCondition, question, type, subItem) => {
+        return newObj = {
+            condition: condition,
+            addCondition: addCondition,
+            question: question,
+            type: type,
+            subItem
+        }
     }
 
     componentDidMount() {
@@ -23,15 +33,16 @@ class AddSubInput extends Component {
     }
 
     render() {
-    const { Obj } = this.state;
-    const { id } = this.props;
+    const { condition, addCondition, question, type, subItem } = this.state;
+    const { ID } = this.props;
         return (
             <myContext.Consumer>
                 {(value) => (
-                <Button onClick={
+                <Button className='SubInputButton' onClick={
                     (e) => {
+                        newObj= this.createNewObj(condition, addCondition, question, type, subItem)
                         e.preventDefault()
-                        value.CreateSubInput(Obj, id)
+                        value.state.CreateSubInput(newObj, ID)
                     }
                     }>
                 Add Sub-Input 

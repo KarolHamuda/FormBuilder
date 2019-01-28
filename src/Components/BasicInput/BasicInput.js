@@ -9,11 +9,11 @@ class BasicInput extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: [],
-      currentItem: 'Yes/No',
-      question: [],
+      currentItem: this.props.ID,
+      question: '',
       subInput: []
     }
+    this.handleQuestion = this.handleQuestion.bind(this)
   }
 
   setDropdownBool = () => {
@@ -34,22 +34,31 @@ class BasicInput extends Component {
     })
   }
 
+  handleQuestion(event) {
+    this.setState({question: event.target.value});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
 
     render() {
-      const { id } = this.props
+      const { currentItem, question } = this.state
+      const { ID } = this.props
         return (
           <myContext.Consumer>
             {(value) => (
-          <Grid className='BasicInput' key={id}>
+          <Grid className='BasicInput' key={ID}>
             
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Col componentClass={ControlLabel} sm={2}>
               Question
               </Col>
               <Col sm={10}>
-                 
-                  <FormControl type="text" placeholder="Enter new question here" />
+                
+                  <FormControl type="text" placeholder="Enter new question here" onChange={this.handleQuestion} />
                 
               </Col>
               </FormGroup>
@@ -74,7 +83,7 @@ class BasicInput extends Component {
                 </FormGroup>
 
                 <Col xs={12} className='Buttons'>
-                  <AddSubInput id={id} />
+                  <AddSubInput key={ID} ID={ID} currentItem={currentItem} question={question} />
                   <Button className='DeleteButton'>
                     Delete
                   </Button>
